@@ -1,0 +1,122 @@
+*{box-sizing:border-box;}
+html,body{height:100%;margin:0;}
+body{
+  font-family:'Segoe UI','Inter',system-ui,-apple-system,sans-serif;
+  min-height:100vh;
+  display:flex;align-items:center;justify-content:flex-end;
+  position:relative;
+  background:
+    linear-gradient(180deg, rgba(4,7,14,.55) 0%, rgba(4,7,14,.75) 60%, rgba(4,7,14,.9) 100%),
+    url('https://images.unsplash.com/photo-1503376780353-7e6692767b70?q=80&w=1920') center/cover no-repeat;
+  padding-right:60px;
+}
+
+/* subtle vignette for extra focus on the card */
+body::after{
+  content:'';position:absolute;inset:0;pointer-events:none;
+  background:radial-gradient(ellipse at center, rgba(0,0,0,0) 40%, rgba(0,0,0,.55) 100%);
+}
+
+.hero-text{
+  position:absolute;
+  left:60px;
+  right:460px;
+  top:62%;
+  transform:translateY(-50%);
+  z-index:2;
+}
+.hero-text h1{
+  color:#fff;
+  font-size:2.6rem;
+  font-weight:800;
+  line-height:1.15;
+  margin:0 0 14px;
+  text-shadow:0 4px 18px rgba(0,0,0,.5);
+}
+.hero-text p{
+  color:#d7dbe6;
+  font-size:1rem;
+  margin:0;
+  text-shadow:0 2px 10px rgba(0,0,0,.5);
+}
+
+@media (max-width:900px){
+  .hero-text{position:static;text-align:center;margin:20px auto 0;padding:0 20px;transform:none;right:auto;}
+  .hero-text h1{font-size:1.8rem;}
+}
+
+.card{
+  position:relative;z-index:2;
+  width:min(90vw,380px);
+  background:rgba(10,13,22,.72);
+  border:1px solid rgba(255,255,255,.08);
+  border-radius:14px;
+  padding:34px 30px 26px;
+  box-shadow:0 30px 70px rgba(0,0,0,.6);
+  backdrop-filter:blur(10px);
+}
+
+.logo{display:flex;flex-direction:column;align-items:center;gap:8px;margin-bottom:26px;}
+.logo .icon{width:46px;height:46px;border-radius:50%;
+  background:radial-gradient(circle at 35% 30%, rgba(255,255,255,.9), rgba(59,130,246,.25) 70%);
+  display:flex;align-items:center;justify-content:center;
+  box-shadow:0 0 0 1px rgba(255,255,255,.15), 0 8px 20px rgba(59,130,246,.35);
+}
+.logo h1{color:#fff;font-size:1.15rem;font-weight:700;margin:0;letter-spacing:.3px;text-align:center;}
+.logo p{color:#9aa5bd;font-size:.78rem;margin:2px 0 0;letter-spacing:.4px;}
+
+.field{margin-bottom:12px;}
+.field input,.field select{
+  width:100%;padding:11px 14px;
+  background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.12);border-radius:7px;
+  color:#e8ecf5;font-size:.9rem;outline:none;
+  transition:border-color .15s ease, background .15s ease;
+}
+.field input::placeholder{color:#7d879e;}
+.field select{color:#a9b2c8;appearance:none;-webkit-appearance:none;cursor:pointer;}
+.field select option{background:#12151f;color:#e8ecf5;}
+.field input:focus,.field select:focus{border-color:#3b82f6;background:rgba(59,130,246,.08);}
+
+.row{display:flex;justify-content:space-between;align-items:center;margin:14px 0 18px;font-size:.78rem;}
+.remember{display:flex;align-items:center;gap:6px;color:#9aa5bd;}
+.remember input{accent-color:#3b82f6;}
+.row a{color:#7fb2ff;text-decoration:none;}
+.row a:hover{text-decoration:underline;}
+
+.btn-login{
+  width:100%;padding:12px;border:none;border-radius:7px;
+  background:linear-gradient(180deg,#3b82f6,#2563eb);
+  color:#fff;font-size:.92rem;font-weight:700;letter-spacing:.5px;
+  cursor:pointer;text-transform:uppercase;
+  box-shadow:0 10px 24px rgba(37,99,235,.4);
+  transition:filter .12s ease, transform .12s ease;
+}
+.btn-login:hover{filter:brightness(1.1);transform:translateY(-1px);}
+
+.help-link{display:block;text-align:center;margin-top:16px;font-size:.78rem;}
+.help-link a{color:#8b95ac;text-decoration:none;}
+.help-link a:hover{color:#7fb2ff;}
+
+.footer-tag{text-align:center;color:#525a6e;font-size:.68rem;margin-top:16px;letter-spacing:.3px;}
+
+.error-msg{
+  display:none;color:#ff9a8a;background:rgba(255,80,60,.1);border:1px solid rgba(255,80,60,.3);
+  font-size:.76rem;padding:7px 10px;border-radius:6px;margin-bottom:12px;
+}
+
+@media (max-width:420px){
+  .card{padding:28px 22px 22px;}
+  body{padding-right:20px;justify-content:center;}
+}
+
+/* ---- Extra alternate theme classes (added on request) ---- */
+body.login-bg {
+    background: linear-gradient(to right, #007bff, #00c6ff);
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.login-box {
+    background-color: #fff;
+}

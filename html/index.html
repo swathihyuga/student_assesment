@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fleet Management System — Login</title>
+<link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+
+  <div class="hero-text">
+    <h1>Fleet &amp; Vehicle<br>Management System</h1>
+    <p>Vehicle Records • Fuel Tracking • Expiry Alerts • Maintenance Reports</p>
+  </div>
+
+  <form class="card" id="loginForm" novalidate>
+    <div class="logo">
+      <div class="icon">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="#3b82f6" stroke-width="2"/><path d="M12 2v6M12 16v6M2 12h6M16 12h6" stroke="#3b82f6" stroke-width="1.6"/><circle cx="12" cy="12" r="3" fill="#3b82f6"/></svg>
+      </div>
+      <h1>Fleet Management System</h1>
+      <p>Welcome back! Please login</p>
+    </div>
+
+    <div class="error-msg" id="errorMsg">Please fill in all fields to continue.</div>
+
+    <div class="field">
+      <select id="role" required>
+        <option value="" disabled selected>Select Role</option>
+        <option value="admin">Admin</option>
+        <option value="manager">Fleet Manager</option>
+        <option value="driver">Driver</option>
+      </select>
+    </div>
+    <div class="field">
+      <input type="text" id="username" placeholder="Username" required autocomplete="username">
+    </div>
+    <div class="field">
+      <input type="password" id="password" placeholder="Password" required autocomplete="current-password">
+    </div>
+
+    <div class="row">
+      <label class="remember"><input type="checkbox"> Remember me</label>
+      <a href="#" id="forgotLink">Forgot password?</a>
+    </div>
+
+    <button type="submit" class="btn-login">Log In</button>
+
+    <div class="help-link"><a href="#" id="helpLink">Need Help? Contact Support</a></div>
+    <div class="footer-tag">© Fleet Management System</div>
+  </form>
+
+<script>
+const form = document.getElementById('loginForm');
+const errorMsg = document.getElementById('errorMsg');
+
+form.addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const role = document.getElementById('role').value;
+  const username = document.getElementById('username').value.trim();
+  const password = document.getElementById('password').value.trim();
+
+  if (!role || !username || !password) {
+    errorMsg.style.display = 'block';
+    return;
+  }
+  errorMsg.style.display = 'none';
+
+  try {
+    // TODO: replace with your actual API URL once the backend is ready
+    const response = await fetch('/api/login', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ role, username, password })
+    });
+
+    const result = await response.json();
+
+    if (!result.success) {
+      errorMsg.textContent = result.message || 'Login failed. Please try again.';
+      errorMsg.style.display = 'block';
+      return;
+    }
+
+    // Login succeeded — redirect or update UI as needed
+    window.location.href = 'dashboard.html'; // change to your actual post-login page
+  } catch (err) {
+    errorMsg.textContent = 'Could not reach the server. Please try again later.';
+    errorMsg.style.display = 'block';
+  }
+});
+
+document.getElementById('forgotLink').addEventListener('click', (e) => {
+  e.preventDefault();
+  alert('Redirect to password reset flow here.');
+});
+
+document.getElementById('helpLink').addEventListener('click', (e) => {
+  e.preventDefault();
+  alert('Redirect to support/help page here.');
+});
+</script>
+</body>
+</html>
